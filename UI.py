@@ -75,9 +75,8 @@ class MainApp:
         if self.photoconfirm[0] and self.photoconfirm[1]:
            
             finishImage = mosaic.partition(self.imagepathes[0], grayscale.grayscaleArray(self.imagepathes[1]), self.ratios)
-            newWindow = tk.Toplevel(self.parent)
-            finalImage = tk.Label(newWindow, image = finishImage)
-            finalImage.image = finishImage
+            
+            finishImage.save( "C:/Users/Bryan/Pictures/humbnail.png")
         else:
             print("NOOOO")
             

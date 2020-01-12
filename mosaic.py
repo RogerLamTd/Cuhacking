@@ -21,6 +21,7 @@ def partition(base, partition, tiles):
 
     curW, curH = [0, 0]
 
+
     #iterate through partitions
     for w in range(tiles[0]):
         curW = w * wTile
@@ -28,10 +29,13 @@ def partition(base, partition, tiles):
             curH = h * hTile
             colourize(pxB, pxP, curW, curH, wTile, hTile)
 
-    return base
+    return im
 
 def colourize(pxB, pxP, curW, curH, width, height):
     #iterate through pixels in partition
     for w in range(width):
         for h in range(height):
-            pxB[w + curW, h + curH] = tuple((value * pxP[0] // 255) for value in pxB[w + curW, h + curH])
+            tup = (int(pxB[w + curW, h + curH][0] * pxP[w,h]), 
+                int(pxB[w + curW, h + curH][1] * pxP[w,h]),
+                int(pxB[w + curW, h + curH][2] * pxP[w,h]))
+            pxB[w + curW, h + curH] = tup
