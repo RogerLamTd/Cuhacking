@@ -6,6 +6,7 @@
 
 import skimage
 from skimage.color import rgb2gray
+from skimage import io
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
@@ -15,7 +16,7 @@ import sys
 
 
 def grayscaleArray(filename):
-    grayscale = rgb2gray(skimage.io.imread(filename))
+    grayscale = rgb2gray(io.imread(filename))
     fig, ax = plt.subplots(figsize=(4,8))
     ax.imshow(grayscale, cmap=plt.cm.gray)
     ax.set_title("Grayscale")

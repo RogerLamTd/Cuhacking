@@ -74,7 +74,7 @@ class MainApp:
         if self.photoconfirm[0] and self.photoconfirm[1]:
             grayImage = grayscale.grayscaleArray(self.imagepathes[1])
             finishImage = mosaic.partition(self.imagepathes[0], grayImage, self.ratios)
-            newWindow = tk.TopLevel(self.parent)
+            newWindow = tk.Toplevel(self.parent)
             finalImage = tk.Label(newWindow, image = finishImage)
             finalImage.image = finishImage
         else:
