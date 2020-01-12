@@ -1,16 +1,19 @@
 import tkinter as tk
 from PIL import ImageTk, Image
-
 from tkinter import filedialog as fd
+import grayscale
+import mosaic
 
 class MainApp:
     def __init__(self, parent):
         
         self.parent = parent
         self.frame = tk.Frame(self.parent, pady = 25, padx = 25)
-        self.ratio1 = 0
-        self.ratio2 = 0
+        self.ratios=[0,0]
+       
+        self.photoconfirm = [False, False]
         #add photo place holders
+        self.imagepathes = ["", ""]
         self.images = []
         self.image1 = tk.Frame(self.frame, height = 250, width = 250, padx = 25, pady = 10)
         self.image1.grid(row = 0, column = 0)
@@ -51,9 +54,9 @@ class MainApp:
 
 
     def putPhoto(self, curr_photo):
+        self.photoconfirm[curr_photo] = True
         filename = fd.askopenfilename()
-       
-        
+        self.imagepathes[curr_photo] = filename
         image = Image.open(filename)
         ## fix formatting afterwards
         image = image.resize((250, 250), Image.ANTIALIAS)
@@ -65,15 +68,20 @@ class MainApp:
         self.images[curr_photo].grid(row = 0, column = curr_photo, padx = 25)
         
     def submitEntry(self):
-        try:
-            self.ratio1 = int(self.enter1.get())
-            self.ratio2 = int(self.enter2.get())
-        except:
-            errorWindow = tk.Toplevel(self.parent)
-            labelerror = tk.Label(errorWindow, text = "[Intro]Okay, I know this is a really bad idea butI'm already here soHere we fuckin’ goRawr[Verse 1]x3 nuzzles, pounces on you, uwu you so warm (Ooh)Couldn't help but notice your bulge from across the floorNuzzles your necky wecky-tilde murr-tilde, hehe")
-            labelerror.pack()
-        print(self.ratio1)
-        print(self.ratio2)
+     
+        self.ratios[0] = int(self.enter1.get())
+        self.ratios[1] = int(self.enter2.get())
+        if self.photoconfirm[0] and self.photoconfirm[1]:
+            grayImage = grayscale.grayscaleArray(self.imagepathes[1])
+            finishImage = mosaic.partition(self.imagepathes[0], grayImage, self.ratios)
+            newWindow = tk.TopLevel(self.parent)
+            finalImage = tk.Label(newWindow, image = finishImage)
+            finalImage.image = finishImage
+        else:
+            print("NOOOO")
+            
+
+    
 
 
 
