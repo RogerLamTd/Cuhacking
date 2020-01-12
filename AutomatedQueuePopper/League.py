@@ -7,28 +7,16 @@ import math
 
 class Process:
     def __init__(self):
-        self.currentHealth = 100
+        self.target = "decline"
         self.ocrErr = False
 
     def processImg(self, greyImg):
-        self.currentHealth
         txt = pytesseract.image_to_string(greyImg)
         print(txt)
-        if txt == 'Accept' or txt == '|1oo':
-            return True
+        if self.target in txt:
         try:        
-            health = int(txt)
-            self.ocrErr = False
-        except:
-            health = self.currentHealth
-            if not self.ocrErr:
-                health = self.currentHealth - 1
-                self.ocrErr = True
 
-        if health < self.currentHealth:
-            self.currentHealth = health
-            return True
-        return False
+        except:
 
 
 
