@@ -7,7 +7,7 @@ def partition(base, partition, tiles):
     #PIL the base image
     im  = Image.open(base)
     pxB = im.load()
-    baseW, baseH = base.size
+    baseW, baseH = im.size
 
     #convert partition image to PIL form
     pilTile = Image.fromarray(partition)
