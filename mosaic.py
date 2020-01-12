@@ -16,7 +16,7 @@ def partition(base, partition, tiles):
     hTile = baseH // tiles[1]
 
     # scale the partition
-    pilTile = Image.resize((wTile, hTile))
+    pilTile = Image.resize(tuple(wTile, hTile))
     pxP = pilTile.load()
 
     curW, curH = [0, 0]
