@@ -1,44 +1,37 @@
 from scipy import ndimage 
 from PIL import Image
-import numpy
 
 
-def partition(base, tile):
+def partition(base, partition, tiles):
 
+    #PIL the base image
     im  = Image.open(base)
-    px = im.load()
-
-    pilTile = Image.fromarray(tile)
+    pxB = im.load()
     baseW, baseH = base.size
 
-    hTiles = 100
-    wTiles = 100
-    height = baseH // htiles
-    width = baseW // wTiles
+    #convert partition image to PIL form
+    pilTile = Image.fromarray(partition)
+
+    wTile = baseW // tiles[0]
+    hTile = baseH // tiles[1]
+
+    # scale the partition
+    pilTile = Image.resize((wTile, hTile))
+    pxP = pilTile.load()
 
     curW, curH = [0, 0]
 
-    for h in range(hTiles):
-        curH = h * height
-        for w in range(wTiles):
-            curW = w * width
-            rgb = avgRGB(curH, curW, height, width, base)
-            mTile = colourize(tile, rgb)
-            save2Base(base, colourize)
+    #iterate through partitions
+    for w in range(tiles[0]):
+        curW = w * width
+        for h in range(tiles[1]):
+            curH = h * height
+            colourize(pxB, pxP, curW, curH, width, height)
 
     return base
 
-def avgRGB(curH, curW, height, width):
-    rgb = [0,0,0]
-    for h in range(height):
-        for w in range(width):
-            rgb[0] += px[h + curH, w + curW][0]
-            rgb[1] += px[h + curH, w + curW][1]
-            rgb[2] += px[h + curH, w + curW][2]
-    rgb[0] = rgb[0] // (height * width)
-    rgb[1] = rgb[1] // (height * width)
-    rgb[2] = rgb[2] // (height * width)
-    return rgb
-
-def colourize(curH, curW
-
+def colourize(pxB, pxP, curW, curH, width, height):
+    #iterate through pixels in partition
+    for w in range(width):
+        for h in range(height):
+            pxB[w + curW, h + curH] = tuple((i * pxP[0]) for value in pxB[w + curW, h + curH])
