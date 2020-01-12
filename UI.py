@@ -37,11 +37,12 @@ class MainApp:
         self.ratioLabel = tk.Label(self.inputFrame1, text = "Input number of pepes")
         self.ratioLabel.pack()
         self.enter1 = tk.Entry(self.inputFrame1)
-        self.enter1.insert(10,"hahahah", )
+        self.enter1.insert(10,10, )
         self.enter1.pack()
         self.ratioLabel = tk.Label(self.inputFrame1, text = "Input number of pepes2")
         self.ratioLabel.pack()
         self.enter2 = tk.Entry(self.inputFrame1)
+        self.enter2.insert(10,10, )
         self.enter2.pack()
         self.submitButton = tk.Button(self.inputFrame1, text = "OK", command = lambda : self.submitEntry())
         self.submitButton.pack()
@@ -72,8 +73,8 @@ class MainApp:
         self.ratios[0] = int(self.enter1.get())
         self.ratios[1] = int(self.enter2.get())
         if self.photoconfirm[0] and self.photoconfirm[1]:
-            grayImage = grayscale.grayscaleArray(self.imagepathes[1])
-            finishImage = mosaic.partition(self.imagepathes[0], grayImage, self.ratios)
+           
+            finishImage = mosaic.partition(self.imagepathes[0], grayscale.grayscaleArray(self.imagepathes[1]), self.ratios)
             newWindow = tk.Toplevel(self.parent)
             finalImage = tk.Label(newWindow, image = finishImage)
             finalImage.image = finishImage

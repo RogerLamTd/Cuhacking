@@ -17,10 +17,6 @@ import sys
 
 def grayscaleArray(filename):
     grayscale = rgb2gray(io.imread(filename))
-    fig, ax = plt.subplots(figsize=(4,8))
-    ax.imshow(grayscale, cmap=plt.cm.gray)
-    ax.set_title("Grayscale")
-    plt.show()
     return grayscale
 
 
