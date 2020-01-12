@@ -11,12 +11,21 @@ class MainApp:
     
     def toggle(self):
         self.pressed = not self.pressed
-        if self.pressed:
+        while self.pressed:
             self.start.configure(text="stop")
-        else:
-            self.start.configure(text="start")
+            self.pressed = popper()
+        
 
-
+def popper():
+    try:
+        box = pyautogui.locateOnScreen("C:/Users/Bryan/Documents/GitHub/Cuhacking/decline.png", confidence = 0.55)
+        loc = pyautogui.center(box)
+        print(loc)
+        pyautogui.click(loc.x, loc.y)
+        return False
+    except:
+        return True
+        
 def main():
     root = tk.Tk()
     app = MainApp(root)

@@ -1,7 +1,8 @@
 import PIL
 import pyautogui 
 
-def main():
+
+def popper():
    while True:
         try:
             box = pyautogui.locateOnScreen("C:/Users/Bryan/Documents/GitHub/Cuhacking/decline.png", confidence = 0.55)
@@ -13,5 +14,3 @@ def main():
             print("bropkebobuo")
         
 
-if __name__ == '__main__':
-    main()
