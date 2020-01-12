@@ -5,6 +5,7 @@ import pytesseract
 import math
 
 
+
 class Process:
     def __init__(self):
         self.target = "decline"
@@ -14,10 +15,11 @@ class Process:
         txt = pytesseract.image_to_string(greyImg)
         print(txt)
         if self.target in txt:
+            print('fu')
         try:        
-
+            print('fu')
         except:
-
+            print('fu')
 
 
 def main():
