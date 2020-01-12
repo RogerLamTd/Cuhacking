@@ -34,4 +34,4 @@ def colourize(pxB, pxP, curW, curH, width, height):
     #iterate through pixels in partition
     for w in range(width):
         for h in range(height):
-            pxB[w + curW, h + curH] = tuple((i * pxP[0]) for value in pxB[w + curW, h + curH])
+            pxB[w + curW, h + curH] = tuple((i * pxP[0] // 255) for value in pxB[w + curW, h + curH])
